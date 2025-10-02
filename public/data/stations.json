@@ -1,0 +1,20 @@
+[
+  {
+    "id": "ST001",
+    "nom": "Récif Aboré",
+    "site": "Nouméa",
+    "typeRecif": "Barrière",
+    "lat": -22.306,
+    "lon": 166.439,
+    "profondeurMax": 15
+  },
+  {
+    "id": "ST002",
+    "nom": "Lagon Sud",
+    "site": "Île des Pins",
+    "typeRecif": "Frangeant",
+    "lat": -22.644,
+    "lon": 167.485,
+    "profondeurMax": 18
+  }
+]

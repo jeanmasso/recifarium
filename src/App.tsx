@@ -1,34 +1,31 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+
+import { Globe3D } from './modules/globe/Globe3D'
+import { TEST_POINTS } from './data/testPoints'
+
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [hoverIndex, setHoverIndex] = useState<number | null>(null)
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <div className="app app--globe-only">
+      <header className="globe-only__hud">
+        <h1>Récifarium — Globe 3D</h1>
+        <p>{hoverIndex === null ? 'Survolez un point' : TEST_POINTS[hoverIndex]?.name ?? ''}</p>
+      </header>
+      <Globe3D
+        points={TEST_POINTS}
+        autoRotate
+        onPointHover={setHoverIndex}
+        onPointClick={(index) => {
+          const point = TEST_POINTS[index]
+          if (point) {
+            console.info('Point sélectionné', point)
+          }
+        }}
+      />
+    </div>
   )
 }
 

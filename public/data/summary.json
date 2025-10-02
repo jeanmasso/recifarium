@@ -1,0 +1,37 @@
+[
+  {
+    "stationId": "ST001",
+    "year": 2024,
+    "kpis": {
+      "total": 340,
+      "topTaxa": [
+        { "code": "BEN", "label": "Benthic", "value": 140 },
+        { "code": "AOU", "label": "Aout", "value": 110 }
+      ],
+      "deltaVsPrev": 8
+    },
+    "bars": [
+      { "code": "BEN", "label": "Benthic", "value": 140 },
+      { "code": "AOU", "label": "Aout", "value": 110 },
+      { "code": "DIA", "label": "Diadèmes", "value": 60 },
+      { "code": "AEM", "label": "Aterm", "value": 30 }
+    ]
+  },
+  {
+    "stationId": "ST002",
+    "year": 2024,
+    "kpis": {
+      "total": 280,
+      "topTaxa": [
+        { "code": "BEN", "label": "Benthic", "value": 120 },
+        { "code": "DIA", "label": "Diadèmes", "value": 90 }
+      ],
+      "deltaVsPrev": -5
+    },
+    "bars": [
+      { "code": "BEN", "label": "Benthic", "value": 120 },
+      { "code": "DIA", "label": "Diadèmes", "value": 90 },
+      { "code": "AOU", "label": "Aout", "value": 70 }
+    ]
+  }
+]
