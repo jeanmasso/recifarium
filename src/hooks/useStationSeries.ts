@@ -12,6 +12,7 @@ export function useStationSeries(stationId: string | null) {
     if (!stationId) {
       setData([])
       setLoading(false)
+      setError(null)
       return
     }
 

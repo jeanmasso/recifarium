@@ -28,7 +28,7 @@ export function Bars3D({
 }: Bars3DProps) {
   const meshRef = useRef<InstancedMesh | null>(null)
 
-  const bars = summary?.bars ?? []
+  const bars = useMemo(() => summary?.bars ?? [], [summary])
 
   const normal = useMemo(() => {
     if (!station) return null
@@ -87,7 +87,7 @@ export function Bars3D({
     if (mesh.instanceColor) {
       mesh.instanceColor.needsUpdate = true
     }
-  }, [bars, basis, cap, normal, palette, radius])
+  }, [bars, basis, cap, normal, palette, radius, station])
 
   if (!station || !summary || !normal || !basis || bars.length === 0) {
     return null

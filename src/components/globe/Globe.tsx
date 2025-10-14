@@ -2,6 +2,12 @@ import { GlobeCanvas } from './GlobeCanvas'
 import { GlobeScene } from './GlobeScene'
 import type { Station, StationSummary } from '../../types/models'
 
+interface FocusTarget {
+  lon: number
+  lat: number
+  distance?: number
+}
+
 interface GlobeProps {
   stations: Station[]
   selectedStation: Station | null
@@ -10,6 +16,8 @@ interface GlobeProps {
   onSelectStation: (id: string) => void
   onHoverStation?: (id: string | null) => void
   barCap: number
+  focus?: FocusTarget
+  autoRotate?: boolean
 }
 
 export function Globe({
@@ -20,9 +28,11 @@ export function Globe({
   onSelectStation,
   onHoverStation,
   barCap,
+  focus,
+  autoRotate = false,
 }: GlobeProps) {
   return (
-    <GlobeCanvas>
+    <GlobeCanvas autoRotate={autoRotate}>
       <GlobeScene
         stations={stations}
         selectedStation={selectedStation}
@@ -31,6 +41,7 @@ export function Globe({
         onSelectStation={onSelectStation}
         onHoverStation={onHoverStation}
         barCap={barCap}
+        focus={focus}
       />
     </GlobeCanvas>
   )

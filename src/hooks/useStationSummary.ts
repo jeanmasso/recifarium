@@ -17,6 +17,7 @@ export function useStationSummary({ stationId, year }: Options) {
     if (!stationId) {
       setData(null)
       setLoading(false)
+      setError(null)
       return
     }
 

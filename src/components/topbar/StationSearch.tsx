@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 
 import type { Station } from '../../types/models'
 
@@ -11,6 +11,17 @@ interface StationSearchProps {
 export function StationSearch({ stations, value, onSelect }: StationSearchProps) {
   const [query, setQuery] = useState('')
   const [open, setOpen] = useState(false)
+
+  useEffect(() => {
+    if (!value) {
+      setQuery('')
+      return
+    }
+    const match = stations.find((station) => station.id === value)
+    if (match) {
+      setQuery(match.nom)
+    }
+  }, [stations, value])
 
   const options = useMemo(() => {
     const token = query.trim().toLowerCase()

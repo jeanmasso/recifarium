@@ -19,6 +19,7 @@ interface GlobeSceneProps {
   onSelectStation: (id: string) => void
   onHoverStation?: (id: string | null) => void
   barCap: number
+  focus?: { lon: number; lat: number; distance?: number }
 }
 
 const upVector = new Vector3(0, 1, 0)
@@ -38,6 +39,7 @@ export function GlobeScene({
   onSelectStation,
   onHoverStation,
   barCap,
+  focus,
 }: GlobeSceneProps) {
   const { camera, controls } = useThree((state) => ({
     camera: state.camera as PerspectiveCamera,
@@ -49,6 +51,23 @@ export function GlobeScene({
   const hasInitializedRef = useRef(false)
 
   useEffect(() => {
+    if (focus) {
+      const surface = lonLatToSphere(focus.lon, focus.lat, EARTH_RADIUS)
+      const focusDistance = focus.distance ?? 2.4
+      const focusPosition = lonLatToSphere(focus.lon, focus.lat, EARTH_RADIUS + focusDistance)
+
+      lookAtRef.current.set(...surface)
+      targetPositionRef.current.set(...focusPosition)
+
+      if (!hasInitializedRef.current) {
+        camera.position.copy(targetPositionRef.current)
+        camera.lookAt(lookAtRef.current)
+        camera.up.copy(upVector)
+        hasInitializedRef.current = true
+      }
+      return
+    }
+
     if (!selectedStation) {
       targetPositionRef.current.copy(defaultCameraPosition)
       lookAtRef.current.copy(defaultTarget)
@@ -67,7 +86,7 @@ export function GlobeScene({
       camera.up.copy(upVector)
       hasInitializedRef.current = true
     }
-  }, [camera, selectedStation])
+  }, [camera, focus, selectedStation])
 
   useFrame(() => {
     camera.position.lerp(targetPositionRef.current, 0.08)
